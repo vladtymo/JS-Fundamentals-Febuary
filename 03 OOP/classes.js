@@ -147,6 +147,12 @@ console.log(`PPI: ${myMonitor.ppi} pixels per inch...`);
 function showProduct(item) {
     alert(item.name);
     item.show(); // polymorphism
+
+    // this - window (primary mode)
+    // this - undefined (strict mode)
+    this.alert("Hello (this.alert)");     // + (- in strict mode)
+    window.alert("Hello (window.alert)"); // +
+    alert("Hello (alert)");               // +
 }
 
 // ------------ polymorphism

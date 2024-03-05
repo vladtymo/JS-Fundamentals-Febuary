@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+</head>
+
+<body>
+    <h1>Working with local storage</h1>
+
+    <form name="creationForm">
+        <label>
+            <span>Name:</span>
+            <input type="text" name="name">
+        </label>
+        <button type="submit">Create</button>
+    </form>
+
+    <h2>Users</h2>
+    <ol>
+        <li>Vlad Tymoshchuk</li>
+    </ol>
+    <div>
+        <button id="loadBtn">Load</button>
+        <button id="saveBtn">Save</button>
+    </div>
+
+    <script>
+        // get elements
+        const form = document.forms.creationForm;
+        const nameIn = form.elements.name;
+        const list = document.querySelector("ol");
+
+        const usersKey = "users-list";
+        let users = [];
+
+        form.onsubmit = (e) => {
+            e.preventDefault();
+
+            users.push(nameIn.value);
+            list.innerHTML += `<li>${nameIn.value}</li>`;
+        }
+
+        // JSON.stringify(obj) - convert object to JSON string
+        // JSON.parse(str) - covert JSON string to object
+        function save() {
+            localStorage.setItem(usersKey, JSON.stringify(users));
+            console.log("Saved");
+        }
+        function load() {
+            users = JSON.parse(localStorage.getItem(usersKey));
+
+            // clear list
+            list.innerHTML = "";
+            // load list items
+            for (const i of users) {
+                list.innerHTML += `<li>${i}</li>`;
+            }
+        }
+
+        saveBtn.onclick = () => save();
+        loadBtn.onclick = () => load();
+    </script>
+</body>
+
+</html>

@@ -12,5 +12,6 @@ let title = "Title in Module Scope!";
 global.title = "Title in Global Scope!";
 
 // Steps to run server:
+// install Node.js: https://nodejs.org
 // run <npm i> to install dependencies (express)
 // run <node file_path> to start app

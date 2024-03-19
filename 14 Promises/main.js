@@ -5,21 +5,21 @@ btn.onclick = () => {
 }
 
 // -=-=-=-=-=-=-=- Callbacks -=-=-=-=-=-=-=-
-// console.log("Before process!");
+console.log("Before process!");
 
-// setTimeout(() => {
-//     let result = 1;
-//     for (let i = 1; i < 6; i++) {
-//         result *= i;
-//     }
-//     console.log("Factorial of 6 = ", result);
+setTimeout(() => {
+    let result = 1;
+    for (let i = 1; i < 6; i++) {
+        result *= i;
+    }
+    console.log("Factorial of 6 = ", result);
 
-//     setTimeout(() => {
-//         console.log("Pow: ", Math.pow(2, 16)); // 3 sec
-//     }, 1000);
-// }, 2000);       // 2 sec
+    setTimeout(() => {
+        console.log("Pow: ", Math.pow(2, 16)); // 3 sec
+    }, 1000);
+}, 2000);       // 2 sec
 
-// console.log("Finish! App is continue working...");
+console.log("Finish! App is continue working...");
 
 // ---------- Promise
 // create syntax: new Promise((resolve, reject) => { work });
@@ -28,25 +28,25 @@ btn.onclick = () => {
 // Promise states: pending -> fullfiled/rejected
 
 // create the promise that return 4^8
-// const hardWork = new Promise((resolve, reject) => {
-//     // do work...
+const hardWork = new Promise((resolve, reject) => {
+    // do work...
 
-//     console.log("Start doing hard work...");
-//     if (Math.random() < 0.5) // 50%
-//         reject(new Error("Something went wrong!")); // error
-//     else {
-//         setTimeout(() => {
-//             const result = Math.pow(4, 8);
-//             resolve(result); // success result
-//         }, 1000);
-//     }
-// });
+    console.log("Start doing hard work...");
+    if (Math.random() < 0.5) // 50%
+        reject(new Error("Something went wrong!")); // error
+    else {
+        setTimeout(() => {
+            const result = Math.pow(4, 8);
+            resolve(result); // success result
+        }, 1000);
+    }
+});
 
-// hardWork
-//     .then((res) => {
-//         console.log("Promise was successfully finished!" + " - " + res);
-//     })
-//     .catch(err => console.warn(err.message));
+hardWork
+    .then((res) => {
+        console.log("Promise was successfully finished!" + " - " + res);
+    })
+    .catch(err => console.warn(err.message));
 
 // create the promise that grenerate users and return them
 // const getUsers = new Promise((res, rej) => {
@@ -97,66 +97,66 @@ function getActiveUser(ip) {
 
 const ip = "198.0.0.3"; // prompt("Enter IP:");
 
-// getActiveUser(ip)
-//     .then(res => {
-//         console.log("Active user:", res);
-//         return getActiveUser("0.0.0.0");
-//     })
-//     .then((res) => console.log(res))
-//     .catch(err => console.log(err.message));
+getActiveUser(ip)
+    .then(res => {
+        console.log("Active user:", res);
+        return getActiveUser("0.0.0.0");
+    })
+    .then((res) => console.log(res))
+    .catch(err => console.log(err.message));
 
-//const getUsers = getActiveUser(ip);
+const getUsers = getActiveUser(ip);
 
 // ------------ Promise methods
-// Promise.all([hardWork, getUsers]).then((values) => {
-//     console.log("All promises have done!");
-// }).catch((err) => console.log(err));
+Promise.all([hardWork, getUsers]).then((values) => {
+    console.log("All promises have done!");
+}).catch((err) => console.log(err));
 
-// Promise.race([hardWork, getUsers]).then((values) => {
-//     console.log("Any promise has done!");
-// }).catch((err) => console.log(err));
+Promise.race([hardWork, getUsers]).then((values) => {
+    console.log("Any promise has done!");
+}).catch((err) => console.log(err));
 
 // ------- fetch()
-//const res = fetch("https://jsonplaceholder.typicode.com/users");
+const res = fetch("https://jsonplaceholder.typicode.com/users");
 
-// res.then((res) => {
-//     // on fullfiled:
-//     console.log(res.status);
-//     return res.json();
-// }).then((users) => {
-//     // on fullfiled:
-//     console.log(users);
-//     resultBlock.innerHTML += `<p>${users[0].name}</p>`;
-// });
+res.then((res) => {
+    // on fullfiled:
+    console.log(res.status);
+    return res.json();
+}).then((users) => {
+    // on fullfiled:
+    console.log(users);
+    resultBlock.innerHTML += `<p>${users[0].name}</p>`;
+});
 
-//console.log("Finish");
+console.log("Finish");
 
 // ------------- [async] & [await] -------------
 // introduced in ES8
 // [await] - wait the promise asynhronously
 // [async] - allows to use await operator in function 
 
-// async function showActiveUser() {
-//     // getActiveUser("198.0.0.3")
-//     //     .then((user) => {
-//     //         console.log(user);
-//     //         document.body.innerHTML += `<p>Active user: ${user.login}</p>`;
-//     //     });
+async function showActiveUser() {
+    // getActiveUser("198.0.0.3")
+    //     .then((user) => {
+    //         console.log(user);
+    //         document.body.innerHTML += `<p>Active user: ${user.login}</p>`;
+    //     });
 
-//     const user = await getActiveUser("198.0.0.3");
+    const user = await getActiveUser("198.0.0.3");
 
-//     // ... continue when the promise is finished
+    // ... continue when the promise is finished
 
-//     console.log(user);
-//     document.body.innerHTML += `<p>Active user: ${user.login}</p>`;
-// }
+    console.log(user);
+    document.body.innerHTML += `<p>Active user: ${user.login}</p>`;
+}
 
-// showActiveUser();
+showActiveUser();
 
 // use await with IIFE
-// (async function () {
-//     console.log("IIFE:", await getActiveUser("198.0.0.3"));
-// }());
+(async function () {
+    console.log("IIFE:", await getActiveUser("198.0.0.3"));
+}());
 
 // TASK: get users from the server
 async function showUsers() {
